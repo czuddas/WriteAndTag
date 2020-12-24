@@ -1,6 +1,6 @@
 jQuery WriteAndTag
 ==========
-WriteAndTag is Javascript class that allows you to
+WriteAndTag is a Javascript class that allows you to
 write text and recognize custom multiple tags inside it.  
 Requires jQuery and jQuery UI.
 
@@ -247,4 +247,4 @@ TODO
 -------
 * Tag editing functionality.
 * Immediate display of the tag list upon insertion of the first character.
-* Some fixes (especially on Mozilla Firefox)
+* Some fixes (especially on Mozilla Firefox).
