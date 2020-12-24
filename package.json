@@ -1,0 +1,28 @@
+{
+	"name": "jQuery WriteAndTag",
+	"description": "A jQuery-based class that allows you to write text and recognize custom tags inside it",
+	"version": "0.1.0 (beta)",
+	"homepage": "https://github.com/czuddas/jQuery-WriteAndTag",
+	"author": "Cristian Zuddas",
+	"keywords": [
+		"jQuery",
+		"jQuery UI",
+		"tag",
+		"Javascript Tags",
+		"custom tags",
+		"manage tags"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/czuddas/jQuery-WriteAndTag.git"
+	},
+	"devDependencies": {
+		"grunt": "1.2.0",
+		"grunt-contrib-clean": "2.0.0",
+		"grunt-contrib-uglify": "4.0.1",
+		"grunt-jsdoc": "^2.4.1"
+	},
+	"dependencies": {
+		"docdash": "^1.2.0"
+	}
+}

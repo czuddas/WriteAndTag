@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WriteAndTag example</title>
+
+    <!-- jQuery and jQuery UI -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- WriteAndTag -->
+    <script src="../dist/WriteAndTag.min.js"></script>
+
+    <style>
+
+        /* The container in your page */
+        div.container {
+            width: 400px;
+            height: 50px;
+            padding: 5px;
+            line-height: 26px;
+            border: 1px solid black;
+        }
+
+        div.retrieve{
+            width: 700px;
+            height: 200px;
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        /* WriteAndTag tags */
+        span[data-writeandtag=true] {
+            border: 1px dotted #f88098;
+            background-color: #d0f8e9;
+            padding: 2px;
+        }
+
+        /* jQuery UI Autocomplete menu */
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Write something here</h1>
+<p>Enter the <b>@</b> character to select from a list of cities (ex. <b>@Rome</b>),
+    or <b>#</b> to select a list of countries (<b>#Italy</b>)
+    and <b>.</b> (dot) for a list of foods (<b>.Pizza</b>).<br />
+    Obviously these characters are configurable and you can also enter free text.</p>
+
+<div class="container"></div>
+
+
+<h1>Retrieve data</h1>
+<button onclick="myDataRetriever('text');">Plain Text</button>
+<button onclick="myDataRetriever('html');">Html Content</button>
+<button onclick="myDataRetriever('json');">JSON Data</button>
+
+<div class="retrieve"></div>
+
+<script>
+    var wt = null;
+
+    $(document).ready(function() {
+        wt = new WriteAndTag();
+        wt.setTags(tags);
+        wt.setContainer('.container');
+        // wt.setTagSeparator(' - ');       // use a custom separator
+        // wt.setSorting(false);            // turn off alphabetical sorting
+    });
+
+    /*
+     * A custom multiple tags list
+     */
+    var tags = [
+
+        // Just some cities...
+        {
+            'tag': '@',
+            'autocomplete' : [
+                {
+                    value: "a1",
+                    label: "Rome"
+                },
+                {
+                    value: "a2",
+                    label: "Madrid"
+                },
+                {
+                    value: "a3",
+                    label: "Berlin"
+                },
+                {
+                    value: "a4",
+                    label: "London"
+                },
+                {
+                    value: "a5",
+                    label: "Paris"
+                }
+            ]
+        },
+
+        // ...and some countries...
+        {
+            'tag': '#',
+            'autocomplete' : [
+                {
+                    value: "b1",
+                    label: "Italy"
+                },
+                {
+                    value: "b2",
+                    label: "Germany"
+                },
+                {
+                    value: "b3",
+                    label: "Greece"
+                },
+                {
+                    value: "b4",
+                    label: "Spain"
+                }
+            ]
+        },
+
+        // ...and some foods.
+        {
+            'tag': '.',
+            'autocomplete' : [
+                {
+                    value: "c1",
+                    label: "Würstel"
+                },
+                {
+                    value: "c2",
+                    label: "Pizza"
+                },
+                {
+                    value: "c3",
+                    label: "Porridge"
+                },
+                {
+                    value: "c4",
+                    label: "Paella"
+                }
+            ]
+        }
+    ];
+
+
+    /*
+     * Just a simple retrieve function
+     */
+    function myDataRetriever(type) {
+        var data = '';
+
+        switch (type) {
+            case 'text':
+                data = wt.getPlainText();
+                break;
+            case 'html':
+                data = wt.getHtml();
+                data = data.replace(/</g, '&lt;');
+                break;
+            case 'json':
+                data = wt.getJson();
+                data = JSON.stringify(data);
+                break;
+        }
+
+        $('.retrieve').html("<code>" + data + "</code>");
+    }
+</script>
+
+
+</body>
+</html>
